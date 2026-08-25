@@ -21,11 +21,13 @@
       images/svc-house.jpg   ✅ 적용 완료 (900×765)
       images/svc-daily.jpg   ✅ 적용 완료 (900×765)
       images/svc-emotion.jpg ✅ 적용 완료 (900×765)
-      images/hero.jpg        ⏳ 필요 — 가로 1600×900, 인물이 오른쪽에 오는 컷
-      images/about-1.jpg     ⏳ 필요 — 가로 900×600
-      images/about-2.jpg     ⏳ 필요 — 가로 900×600
-      images/about-3.jpg     ⏳ 필요 — 가로 900×600
+      images/hero.jpg        ✅ 적용 완료 (1800×820)
+      images/about-1.jpg     ✅ 적용 완료 (900×600)
+      images/about-2.jpg     ✅ 적용 완료 (900×600)
+      images/about-3.jpg     ✅ 적용 완료 (900×600)
       ※ 파일이 없으면 회색 안내 박스가 대신 표시됩니다.
+      ※ 교체 시 반드시 위 크기로 줄여서 넣으세요. 원본(수 MB)을 그대로 두면
+        모바일에서 로딩이 눈에 띄게 느려집니다.
 
   [3] 상담 신청 폼 연결
       맨 아래 FORM_ENDPOINT 값에 Formspree(formspree.io) 등에서 발급받은
@@ -271,11 +273,12 @@ nav a:hover,nav a:focus-visible{color:var(--orange-d);border-bottom-color:var(--
 .info dd{font-size:1.0625rem;margin-top:5px;font-weight:600}
 .info dd a{color:var(--ink);text-decoration:none}
 .info dd small{display:block;font-size:.875rem;color:var(--muted);font-weight:500;margin-top:4px}
-.map{
-  background:#F0EAE1;border:1px solid var(--line);border-radius:var(--r);min-height:340px;
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  color:#AB9C88;font-size:.875rem;font-weight:600;padding:24px;line-height:1.7;
-}
+.map{background:#F0EAE1;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+/* 카카오맵 퍼가기 위젯을 컨테이너 폭에 맞춤 */
+.map .root_daum_roughmap{width:100% !important}
+.map .root_daum_roughmap .wrap_map{height:360px !important}
+.map .root_daum_roughmap img{max-width:none}
+@media(max-width:700px){ .map .root_daum_roughmap .wrap_map{height:280px !important} }
 
 /* ── 상담 폼 ───────────────────────────── */
 .apply{background:var(--teal);padding:0;color:#fff}
@@ -365,7 +368,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   <div class="wrap">
     <div class="hero-box">
       <div class="slot" data-label="images/hero.jpg — 거실에서 어르신과 요양보호사 (가로 1600×900, 인물이 오른쪽에)">
-        <img fetchpriority="high" decoding="async" width="1600" height="900" src="images/hero.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
+        <img fetchpriority="high" decoding="async" width="1800" height="820" src="images/hero.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
       </div>
       <div class="hero-in">
         <h1>사랑과 정성으로<br>어르신을 모십니다</h1>
@@ -569,10 +572,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <dd style="font-size:1rem">제0000000000호</dd>
       </dl>
       <!--
-        지도: 카카오맵 또는 네이버 지도의 '지도 퍼가기' iframe 코드를
-        아래 div 전체와 교체하세요. (카카오맵 → 장소 검색 → 공유 → 지도 퍼가기)
+        카카오맵 지도 퍼가기.
+        위치가 바뀌면 카카오맵 → 장소 검색 → 공유 → 지도 퍼가기 에서
+        다시 뽑아 아래 timestamp / key / 컨테이너 id 세 값을 교체하세요.
+        (컨테이너 id 의 숫자와 timestamp 값은 반드시 같아야 합니다.)
       -->
-      <div class="map">여기에 카카오맵 또는 네이버 지도<br>‘지도 퍼가기’ 코드를 넣으세요</div>
+      <div class="map">
+        <div id="daumRoughmapContainer1787637354732" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -627,6 +634,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   <a class="c1" href="tel:032-468-2459">전화 상담하기</a>
   <a class="c2" href="#apply">상담 신청</a>
 </div>
+
+<!-- 카카오맵 지도 퍼가기 — 로더 (지도를 여러 개 넣어도 이 스크립트는 하나만) -->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+<script charset="UTF-8">
+  (function(){
+    function renderMap(){
+      if (typeof daum === "undefined" || !daum.roughmap) return false;
+      new daum.roughmap.Lander({
+        "timestamp": "1787637354732",
+        "key": "tjuipcorfv7",
+        "mapWidth": "100%",   /* 카카오 원본값은 "640" — 폭이 이상하면 640 으로 되돌리세요 */
+        "mapHeight": "360"
+      }).render();
+      return true;
+    }
+    if (!renderMap()) {
+      /* 로더 스크립트가 늦게 붙는 경우 대비 */
+      var tries = 0;
+      var t = setInterval(function(){
+        if (renderMap() || ++tries > 40) clearInterval(t);
+      }, 150);
+    }
+  })();
+</script>
 
 <script type="application/ld+json">
 {
