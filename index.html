@@ -101,13 +101,19 @@ h2.sec-title{font-size:clamp(1.55rem,4.6vw,2.2rem);font-weight:800;letter-spacin
 
 /* ── 이미지 슬롯 ───────────────────────── */
 .slot{position:relative;background:#F0EAE1;overflow:hidden}
-.slot img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+.slot img{
+  width:100%;height:100%;object-fit:cover;position:relative;z-index:1;
+  opacity:0;transition:opacity .35s ease;
+}
+.slot img[data-loaded]{opacity:1}
+.slot img[data-missing]{display:none}
+/* 안내 문구는 이미지가 아직 없거나 로드에 실패했을 때만 노출 */
 .slot::after{
   content:attr(data-label);position:absolute;inset:0;z-index:0;
-  display:flex;align-items:center;justify-content:center;text-align:center;
+  display:none;align-items:center;justify-content:center;text-align:center;
   padding:16px;font-size:.8125rem;font-weight:600;color:#AB9C88;line-height:1.6;
 }
-.slot img[data-missing]{display:none}
+.slot[data-empty]::after{display:flex}
 
 /* ── 헤더 ───────────────────────────── */
 header{
@@ -359,7 +365,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   <div class="wrap">
     <div class="hero-box">
       <div class="slot" data-label="images/hero.jpg — 거실에서 어르신과 요양보호사 (가로 1600×900, 인물이 오른쪽에)">
-        <img src="images/hero.jpg" alt="" onerror="this.setAttribute('data-missing','')">
+        <img fetchpriority="high" decoding="async" width="1600" height="900" src="images/hero.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
       </div>
       <div class="hero-in">
         <h1>사랑과 정성으로<br>어르신을 모십니다</h1>
@@ -403,7 +409,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <p>세면, 몸 청결, 이동 도움, 화장실 이용 등 몸으로 하기 어려워진 일을 돕습니다.</p>
         </div>
         <div class="slot" data-label="images/svc-body.jpg">
-          <img loading="lazy" decoding="async" src="images/svc-body.jpg" alt="요양보호사가 어르신의 이동을 돕는 모습" onerror="this.setAttribute('data-missing','')">
+          <img loading="lazy" decoding="async" width="900" height="765" src="images/svc-body.jpg" alt="요양보호사가 어르신의 이동을 돕는 모습" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
         </div>
       </article>
 
@@ -414,7 +420,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <p>취사, 청소, 주변 정돈, 세탁 등 어르신 생활공간을 정리하고 식사를 준비합니다.</p>
         </div>
         <div class="slot" data-label="images/svc-house.jpg">
-          <img loading="lazy" decoding="async" src="images/svc-house.jpg" alt="요양보호사가 어르신의 식사를 준비하는 모습" onerror="this.setAttribute('data-missing','')">
+          <img loading="lazy" decoding="async" width="900" height="765" src="images/svc-house.jpg" alt="요양보호사가 어르신의 식사를 준비하는 모습" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
         </div>
       </article>
 
@@ -425,7 +431,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <p>외출 시 동행, 산책, 은행·관공서 등 일상 업무 대행으로 바깥일을 함께합니다.</p>
         </div>
         <div class="slot" data-label="images/svc-daily.jpg">
-          <img loading="lazy" decoding="async" src="images/svc-daily.jpg" alt="요양보호사가 어르신과 산책하는 모습" onerror="this.setAttribute('data-missing','')">
+          <img loading="lazy" decoding="async" width="900" height="765" src="images/svc-daily.jpg" alt="요양보호사가 어르신과 산책하는 모습" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
         </div>
       </article>
 
@@ -436,7 +442,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <p>말벗, 격려와 위로, 생활 상담 등 혼자 계신 시간의 외로움을 함께 나눕니다.</p>
         </div>
         <div class="slot" data-label="images/svc-emotion.jpg">
-          <img loading="lazy" decoding="async" src="images/svc-emotion.jpg" alt="요양보호사가 어르신과 대화를 나누는 모습" onerror="this.setAttribute('data-missing','')">
+          <img loading="lazy" decoding="async" width="900" height="765" src="images/svc-emotion.jpg" alt="요양보호사가 어르신과 대화를 나누는 모습" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')">
         </div>
       </article>
     </div>
@@ -472,9 +478,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     </div>
 
     <div class="gallery">
-      <div class="slot" data-label="images/about-1.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-1.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
-      <div class="slot" data-label="images/about-2.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-2.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
-      <div class="slot" data-label="images/about-3.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-3.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
+      <div class="slot" data-label="images/about-1.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" width="900" height="600" src="images/about-1.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')"></div>
+      <div class="slot" data-label="images/about-2.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" width="900" height="600" src="images/about-2.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')"></div>
+      <div class="slot" data-label="images/about-3.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" width="900" height="600" src="images/about-3.jpg" alt="" onload="this.setAttribute('data-loaded','')" onerror="this.setAttribute('data-missing','');this.parentNode.setAttribute('data-empty','')"></div>
     </div>
   </div>
 </section>
@@ -566,28 +572,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         지도: 카카오맵 또는 네이버 지도의 '지도 퍼가기' iframe 코드를
         아래 div 전체와 교체하세요. (카카오맵 → 장소 검색 → 공유 → 지도 퍼가기)
       -->
-	  
-	  <!-- * 카카오맵 - 지도퍼가기 -->
-		<!-- 1. 지도 노드 -->
-		<div id="daumRoughmapContainer1787622453383" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-
-		<!--
-			2. 설치 스크립트
-			* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
-		-->
-		<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-
-		<!-- 3. 실행 스크립트 -->
-		<script charset="UTF-8">
-			new daum.roughmap.Lander({
-				"timestamp" : "1787622453383",
-				"key" : "2vz2y7kkcxjb",
-				"mapWidth" : "640",
-				"mapHeight" : "360"
-			}).render();
-		</script>
-	  
-	  
+      <div class="map">여기에 카카오맵 또는 네이버 지도<br>‘지도 퍼가기’ 코드를 넣으세요</div>
     </div>
   </div>
 </section>
@@ -712,6 +697,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         else{ msg.textContent = '전송에 실패했습니다. 032-468-2459로 전화 주세요.'; }
       })
       .catch(function(){ msg.textContent = '전송에 실패했습니다. 032-468-2459로 전화 주세요.'; });
+  });
+
+  /* 이미지 상태 보정 — 캐시로 onload를 놓친 경우 대비 */
+  Array.prototype.forEach.call(document.querySelectorAll('.slot img'), function(img){
+    if(img.complete){
+      if(img.naturalWidth > 0){ img.setAttribute('data-loaded',''); }
+      else { img.setAttribute('data-missing',''); img.parentNode.setAttribute('data-empty',''); }
+    }
   });
 
   /* 스크롤 등장 */
