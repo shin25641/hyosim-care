@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+═══════════════════════════════════════════════════════════════
+  효심노인복지센터 홈페이지
+───────────────────────────────────────────────────────────────
+  [1] 텍스트 교체 항목 — 파일 전체에서 찾아 바꾸세요 (Ctrl+F)
+      제0000000000호        → 장기요양기관 지정번호
+      ○○○                  → 대표자(센터장) 성함
+      000-00-00000         → 사업자등록번호
+      hyosim@example.com   → 이메일
+      https://example.com  → 실제 도메인 (og:url, canonical, JSON-LD)
+      37.4450 / 126.7310   → 실제 위도·경도 (JSON-LD)
+
+  [2] 이미지 교체 — images/ 폴더에 아래 파일명으로 넣으면 자동 적용
+      images/svc-body.jpg    ✅ 적용 완료 (900×765)
+      images/svc-house.jpg   ✅ 적용 완료 (900×765)
+      images/svc-daily.jpg   ✅ 적용 완료 (900×765)
+      images/svc-emotion.jpg ✅ 적용 완료 (900×765)
+      images/hero.jpg        ⏳ 필요 — 가로 1600×900, 인물이 오른쪽에 오는 컷
+      images/about-1.jpg     ⏳ 필요 — 가로 900×600
+      images/about-2.jpg     ⏳ 필요 — 가로 900×600
+      images/about-3.jpg     ⏳ 필요 — 가로 900×600
+      ※ 파일이 없으면 회색 안내 박스가 대신 표시됩니다.
+
+  [3] 상담 신청 폼 연결
+      맨 아래 FORM_ENDPOINT 값에 Formspree(formspree.io) 등에서 발급받은
+      URL을 넣으면 실제로 전송됩니다. 비워두면 전화 안내가 뜹니다.
+
+  [4] 배경색 조절
+      :root 의 --bg(페이지 기본)와 --band(구분 섹션)만 바꾸면 전체 톤이 바뀝니다.
+      완전한 순백을 원하시면 --band 도 #FFFFFF 로 두고,
+      .band 규칙의 border-top/bottom 으로만 섹션을 구분하세요.
+═══════════════════════════════════════════════════════════════
+  ⚠ 법적 주의 (반드시 확인)
+  1. 지정받지 않은 급여를 제공한다고 표기하면 허위·과대광고입니다.
+     실제 지정된 급여 범위에 맞는 항목만 남기세요.
+  2. "본인부담금 할인 / 면제 / 지원 / 사은품" 문구는 절대 넣지 마세요.
+     노인장기요양보험법상 금지된 유인·알선 행위입니다.
+  3. AI로 만든 인물 사진은 '분위기 이미지'로만 쓰고, 실제 직원이나
+     이용 어르신인 것처럼 표기하지 마세요.
+  4. 상담 폼은 개인정보를 수집하므로 동의 체크박스가 필수입니다(이미 포함).
+  5. 나중에 이용 후기를 넣으실 때는 반드시 실제로 받은 후기만,
+     서면 동의를 받아 게시하세요. 지어낸 후기는 표시광고법 위반입니다.
+═══════════════════════════════════════════════════════════════
+-->
+
+<title>효심노인복지센터 | 인천 남동구 방문요양 · 재가노인요양센터</title>
+<meta name="description" content="사랑과 정성으로 모시는 효심노인복지센터. 인천 남동구에서 어르신 댁으로 찾아가는 방문요양 서비스를 제공합니다. 장기요양등급 신청부터 도와드립니다. 010-8975-2459">
+<link rel="canonical" href="https://example.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="효심노인복지센터 | 인천 남동구 방문요양">
+<meta property="og:description" content="사랑과 정성으로 모시는 효심노인복지센터. 장기요양등급 신청부터 방문요양까지 함께합니다.">
+<meta property="og:url" content="https://example.com/">
+<meta property="og:image" content="https://example.com/images/hero.jpg">
+<meta property="og:locale" content="ko_KR">
+<meta name="theme-color" content="#FFFFFF">
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+
+<style>
+:root{
+  --bg:#FFFFFF;          /* 페이지 기본 배경 */
+  --band:#FBF7F1;        /* 구분 섹션 배경 (아주 옅은 웜톤) */
+  --white:#FFFFFF;
+  --orange:#E5883A;
+  --orange-d:#CE7326;
+  --orange-l:#F2A25B;
+  --teal:#69B7AF;
+  --teal-d:#4E9E96;
+  --rose:#C0504B;
+  --ink:#3A2C20;
+  --muted:#7C6A59;
+  --line:#E7DFD3;
+  --r:18px;
+  --r-lg:26px;
+  --wrap:1180px;
+  --bar:74px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:78px}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:17px;line-height:1.72;letter-spacing:-.015em;word-break:keep-all;
+  padding-bottom:var(--bar);
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+.center{text-align:center}
+section{padding:66px 0}
+.band{background:var(--band);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+h2.sec-title{font-size:clamp(1.55rem,4.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.4}
+.sec-sub{color:var(--muted);font-size:1.0125rem;margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto}
+
+/* ── 이미지 슬롯 ───────────────────────── */
+.slot{position:relative;background:#F0EAE1;overflow:hidden}
+.slot img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
+.slot::after{
+  content:attr(data-label);position:absolute;inset:0;z-index:0;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:16px;font-size:.8125rem;font-weight:600;color:#AB9C88;line-height:1.6;
+}
+.slot img[data-missing]{display:none}
+
+/* ── 헤더 ───────────────────────────── */
+header{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.head{display:flex;align-items:center;gap:20px;height:78px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:none}
+.brand-mark{width:42px;height:42px;flex:none}
+.brand-txt b{display:block;font-size:1.1875rem;font-weight:800;letter-spacing:-.035em;line-height:1.2}
+.brand-txt span{display:block;font-size:.75rem;color:var(--muted);letter-spacing:-.02em;margin-bottom:2px}
+nav{display:none;margin-left:auto;gap:28px;font-size:.9875rem;font-weight:600}
+nav a{text-decoration:none;color:var(--ink);padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--orange-d);border-bottom-color:var(--orange)}
+.head-cta{
+  display:none;margin-left:6px;background:var(--orange);color:#fff;text-decoration:none;
+  font-weight:700;font-size:.9375rem;padding:11px 22px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 2px 0 var(--orange-d);
+}
+.head-cta:hover{background:var(--orange-d);box-shadow:0 2px 0 #B2611D}
+@media(min-width:1000px){ nav{display:flex} .head-cta{display:inline-block} }
+@media(max-width:999px){ .head-tel-m{margin-left:auto;font-weight:800;color:var(--orange-d);text-decoration:none;font-size:1.0625rem} }
+@media(min-width:1000px){ .head-tel-m{display:none} }
+
+/* ── 히어로 ───────────────────────────── */
+.hero{padding:28px 0 60px}
+.hero-box{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:440px;display:flex}
+.hero-box .slot{position:absolute;inset:0}
+.hero-box::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:linear-gradient(100deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.9) 34%,rgba(255,255,255,.3) 60%,rgba(255,255,255,0) 78%);
+}
+.hero-in{position:relative;z-index:3;align-self:center;padding:48px 32px;max-width:560px}
+.hero h1{font-size:clamp(1.85rem,5.6vw,2.9rem);font-weight:800;letter-spacing:-.04em;line-height:1.32}
+.hero p{font-size:1.0625rem;color:var(--muted);margin:16px 0 28px;font-weight:500}
+.hero-btns{display:flex;flex-wrap:wrap;gap:10px}
+@media(max-width:700px){
+  .hero-box{min-height:0;flex-direction:column;border:1px solid var(--line)}
+  .hero-box .slot{position:relative;inset:auto;height:230px}
+  .hero-box::after{display:none}
+  .hero-in{padding:28px 24px 32px;max-width:none}
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 26px;border-radius:999px;font-weight:700;font-size:1.0125rem;
+  text-decoration:none;border:2px solid transparent;cursor:pointer;
+  font-family:inherit;transition:transform .12s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-o{background:var(--orange);color:#fff;box-shadow:0 3px 0 var(--orange-d)}
+.btn-o:hover{background:var(--orange-d);box-shadow:0 3px 0 #B2611D}
+.btn-line{border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:#fff}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:26px;font-size:.9375rem;color:var(--muted);font-weight:500}
+.hero-badges b{color:var(--orange-d);font-weight:700}
+
+/* ── 대상자 ───────────────────────────── */
+.target{
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;
+  margin-top:34px;padding:22px 26px;
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+}
+.target-tag{
+  display:inline-flex;align-items:center;gap:8px;flex:none;
+  background:#FBE7E6;color:var(--rose);font-weight:800;font-size:1.0125rem;
+  padding:10px 20px;border-radius:999px;letter-spacing:-.02em;
+}
+.target-tag svg{width:20px;height:20px}
+.target p{font-size:1rem;font-weight:600;line-height:1.65}
+.target p span{display:inline-block;color:var(--muted);font-size:.875rem;font-weight:500;margin-top:2px}
+
+/* ── 서비스 카드 ────────────────────────── */
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+@media(min-width:900px){.svc{grid-template-columns:repeat(4,1fr);gap:18px}}
+.svc-card{
+  border-radius:var(--r);overflow:hidden;background:var(--white);
+  border:1px solid var(--line);display:flex;flex-direction:column;
+}
+.svc-top{padding:26px 18px 24px;text-align:center;color:#fff}
+.svc-card:nth-child(odd) .svc-top{background:var(--orange)}
+.svc-card:nth-child(even) .svc-top{background:var(--teal)}
+.svc-top svg{width:34px;height:34px;margin:0 auto 12px;display:block}
+.svc-top h3{font-size:1.1875rem;font-weight:800;letter-spacing:-.03em;margin-bottom:8px}
+.svc-top p{font-size:.875rem;line-height:1.65;opacity:.95;font-weight:500}
+.svc-card .slot{aspect-ratio:4/3.4;flex:1}
+.svc-foot{margin-top:22px;font-size:.875rem;color:var(--muted);text-align:center;line-height:1.7}
+
+/* ── 특징 카드 ──────────────────────────── */
+.feat{display:grid;gap:14px;margin-top:36px}
+@media(min-width:820px){.feat{grid-template-columns:repeat(3,1fr);gap:20px}}
+.feat-card{background:var(--white);border-radius:var(--r);padding:32px 26px;text-align:center;border:1px solid var(--line)}
+.feat-ico{width:56px;height:56px;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+.feat-card:nth-child(1) .feat-ico{background:#FCEBD8}
+.feat-card:nth-child(2) .feat-ico{background:#FBE3E0}
+.feat-card:nth-child(3) .feat-ico{background:#DDF0ED}
+.feat-ico svg{width:28px;height:28px}
+.feat-card h3{font-size:1.125rem;font-weight:800;letter-spacing:-.03em;margin-bottom:10px}
+.feat-card p{font-size:.9375rem;color:var(--muted);line-height:1.68}
+
+/* ── 분위기 사진 3컷 ─────────────────────── */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px}
+.gallery .slot{aspect-ratio:4/3;border-radius:var(--r)}
+@media(max-width:700px){.gallery{grid-template-columns:1fr;gap:10px}}
+
+/* ── 이용 절차 ──────────────────────────── */
+.steps{counter-reset:s;display:grid;gap:12px;margin-top:36px}
+@media(min-width:900px){.steps{grid-template-columns:repeat(5,1fr);gap:14px}}
+.step{
+  counter-increment:s;background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r);padding:26px 22px;
+}
+.step::before{
+  content:counter(s);
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;
+  font-weight:800;font-size:1.0625rem;margin-bottom:14px;
+}
+.step h3{font-size:1.0625rem;font-weight:800;letter-spacing:-.03em;margin-bottom:7px}
+.step p{font-size:.9125rem;color:var(--muted);line-height:1.66}
+
+/* ── 비용 ───────────────────────────── */
+.calc{max-width:760px;margin:34px auto 0;background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.grades{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:26px 22px 4px}
+.grade{
+  font-family:inherit;font-size:.9875rem;font-weight:700;cursor:pointer;
+  padding:11px 20px;border-radius:999px;border:2px solid var(--line);
+  background:var(--white);color:var(--ink);transition:all .12s ease;
+}
+.grade:hover{border-color:var(--orange-l)}
+.grade[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#fff}
+.calc-out{padding:22px 26px 26px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line)}
+.row span{font-size:.9875rem;color:var(--muted);font-weight:500}
+.row b{font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums}
+.row.big{padding:20px 22px;margin-top:16px;background:#E6F4F1;border-radius:var(--r);border:0}
+.row.big span{font-weight:800;color:var(--ink);font-size:1.0125rem}
+.row.big b{font-size:1.625rem;color:var(--teal-d)}
+.calc-hint{margin-top:14px;font-size:.9375rem;color:var(--muted)}
+.calc-note{font-size:.8375rem;color:var(--muted);line-height:1.7;padding:18px 26px;background:var(--band);border-top:1px solid var(--line)}
+.calc-note a{color:var(--orange-d);font-weight:700}
+
+/* ── 오시는 길 ──────────────────────────── */
+.contact{display:grid;gap:26px;margin-top:34px}
+@media(min-width:900px){.contact{grid-template-columns:1fr 1.15fr;gap:44px;align-items:start}}
+.info{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px}
+.info dt{font-size:.75rem;font-weight:800;letter-spacing:.1em;color:var(--orange-d);margin-top:22px}
+.info dt:first-of-type{margin-top:0}
+.info dd{font-size:1.0625rem;margin-top:5px;font-weight:600}
+.info dd a{color:var(--ink);text-decoration:none}
+.info dd small{display:block;font-size:.875rem;color:var(--muted);font-weight:500;margin-top:4px}
+.map{
+  background:#F0EAE1;border:1px solid var(--line);border-radius:var(--r);min-height:340px;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#AB9C88;font-size:.875rem;font-weight:600;padding:24px;line-height:1.7;
+}
+
+/* ── 상담 폼 ───────────────────────────── */
+.apply{background:var(--teal);padding:0;color:#fff}
+.apply-in{display:grid;gap:26px;padding:52px 0}
+@media(min-width:900px){.apply-in{grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}}
+.apply h2{font-size:clamp(1.5rem,4.4vw,2.05rem);font-weight:800;letter-spacing:-.035em;line-height:1.35}
+.apply .lead{margin-top:12px;font-size:.9875rem;color:#E2F2F0;font-weight:500}
+.form-grid{display:grid;gap:10px}
+@media(min-width:640px){.form-grid{grid-template-columns:1fr 1fr}}
+.form-grid .full{grid-column:1/-1}
+.form-grid input,.form-grid textarea{
+  width:100%;font-family:inherit;font-size:1rem;padding:15px 18px;border-radius:12px;
+  border:0;background:#fff;color:var(--ink);
+}
+.form-grid textarea{min-height:104px;resize:vertical}
+.form-grid input::placeholder,.form-grid textarea::placeholder{color:#A99A88}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.8375rem;color:#E2F2F0;line-height:1.6;grid-column:1/-1}
+.consent input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--orange)}
+.form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.form-msg{font-size:.9375rem;font-weight:700;color:#fff}
+
+/* ── 푸터 ───────────────────────────── */
+footer{background:var(--band);border-top:1px solid var(--line);padding:44px 0 40px;font-size:.875rem;color:var(--muted);line-height:1.85}
+.foot-top{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start}
+footer strong{display:block;color:var(--ink);font-size:1.0625rem;font-weight:800;margin-bottom:12px;letter-spacing:-.03em}
+footer .fine{margin-top:18px;font-size:.8125rem;color:#9A8977;max-width:66ch}
+
+/* ── 하단 고정바 ──────────────────────── */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:70;
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+  border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);
+}
+.callbar a{display:flex;align-items:center;justify-content:center;gap:8px;height:var(--bar);text-decoration:none;font-weight:800;font-size:1.0625rem}
+.callbar .c1{background:var(--orange);color:#fff}
+.callbar .c2{background:#fff;color:var(--ink)}
+@media(min-width:1000px){ .callbar{display:none} body{padding-bottom:0} }
+
+/* ── 접근성 ───────────────────────────── */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:3px solid var(--orange);outline-offset:3px;border-radius:6px;
+}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;z-index:99;background:var(--orange);color:#fff;padding:12px 18px;border-radius:8px;font-weight:700}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header>
+  <div class="wrap head">
+    <a class="brand" href="#top" aria-label="효심노인복지센터 홈">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 3.5c1.9 4.6 4.4 7.1 9 9-4.6 1.9-7.1 4.4-9 9-1.9-4.6-4.4-7.1-9-9 4.6-1.9 7.1-4.4 9-9Z" fill="#3E8FD0"/>
+        <path d="M40.5 25.5c1 5.8-2.4 11.4-8 13.4-4.6 1.6-9.4.2-12.4-3.2 4.6-1.2 7.3-3.1 9.6-6 2.6-3.2 5.6-4.7 10.8-4.2Z" fill="#5FB94E"/>
+        <path d="M20 30.5c0 4.4-3.3 8-7.6 8-3.7 0-6.4-2.7-6.4-6.2 0-3.1 2.3-5.5 5.2-5.5 2.5 0 4.4 1.8 4.4 4.1 0 1.9-1.4 3.4-3.2 3.4-1.5 0-2.6-1-2.6-2.4" fill="none" stroke="#F2A33C" stroke-width="3.1" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-txt">
+        <span>사랑과 정성으로 모시는</span>
+        <b>효심노인복지센터</b>
+      </span>
+    </a>
+    <nav>
+      <a href="#service">서비스 안내</a>
+      <a href="#feature">센터 특징</a>
+      <a href="#process">이용 절차</a>
+      <a href="#cost">비용 안내</a>
+      <a href="#contact">오시는 길</a>
+    </nav>
+    <a class="head-cta" href="#apply">상담 신청</a>
+    <a class="head-tel-m" href="tel:010-8975-2459">010-8975-2459</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 히어로 -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-box">
+      <div class="slot" data-label="images/hero.jpg — 거실에서 어르신과 요양보호사 (가로 1600×900, 인물이 오른쪽에)">
+        <img src="images/hero.jpg" alt="" onerror="this.setAttribute('data-missing','')">
+      </div>
+      <div class="hero-in">
+        <h1>사랑과 정성으로<br>어르신을 모십니다</h1>
+        <p>효심노인복지센터는 어르신 댁으로 요양보호사가 직접 찾아가는 인천 남동구 재가요양기관입니다. 장기요양등급 신청부터 서비스 시작까지 보호자 대신 챙겨드립니다.</p>
+        <div class="hero-btns">
+          <a class="btn btn-o" href="tel:010-8975-2459">전화 상담 010-8975-2459</a>
+          <a class="btn btn-line" href="#service">서비스 자세히 보기</a>
+        </div>
+        <div class="hero-badges">
+          <span><b>상담료 없음</b> · 등급이 없어도 문의 가능</span>
+          <span><b>평일 09:00–18:00</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 주요 서비스 -->
+<section id="service">
+  <div class="wrap reveal">
+    <div class="center">
+      <h2 class="sec-title">주요 서비스 안내</h2>
+      <p class="sec-sub">요양보호사가 어르신 댁으로 찾아가 네 가지 영역을 함께 돌봅니다. 어르신 상태에 따라 필요한 것에 시간을 더 씁니다.</p>
+    </div>
+
+    <div class="target">
+      <div class="target-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7-4.2-7-9.1A3.9 3.9 0 0 1 12 8.8a3.9 3.9 0 0 1 7 2.6c0 4.9-7 9.1-7 9.1Z"/><path d="M12 8.8V3.5"/></svg>
+        대상자
+      </div>
+      <p>치매, 뇌졸중, 파킨슨병 등 노인성 질환으로 거동이 불편하신 어르신<br>
+        <span>장기요양인정등급 1등급 ~ 5등급</span></p>
+    </div>
+
+    <!-- ⚠ 지정받은 급여 범위에 맞는 항목만 남기세요 -->
+    <div class="svc">
+      <article class="svc-card">
+        <div class="svc-top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.6"/><path d="M8 21v-5l-1.6-2.6.8-3.4A2.6 2.6 0 0 1 9.7 8h4.6a2.6 2.6 0 0 1 2.5 2l.8 3.4L16 16v5"/></svg>
+          <h3>신체활동</h3>
+          <p>세면, 몸 청결, 이동 도움, 화장실 이용 등 몸으로 하기 어려워진 일을 돕습니다.</p>
+        </div>
+        <div class="slot" data-label="images/svc-body.jpg">
+          <img loading="lazy" decoding="async" src="images/svc-body.jpg" alt="요양보호사가 어르신의 이동을 돕는 모습" onerror="this.setAttribute('data-missing','')">
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5 12 4l8.5 6.5"/><path d="M5.5 9.6V20h13V9.6"/><path d="M9.5 20v-5h5v5"/></svg>
+          <h3>가사활동</h3>
+          <p>취사, 청소, 주변 정돈, 세탁 등 어르신 생활공간을 정리하고 식사를 준비합니다.</p>
+        </div>
+        <div class="slot" data-label="images/svc-house.jpg">
+          <img loading="lazy" decoding="async" src="images/svc-house.jpg" alt="요양보호사가 어르신의 식사를 준비하는 모습" onerror="this.setAttribute('data-missing','')">
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13" cy="4.6" r="2.1"/><path d="M11.4 20.5 13 15l-2.7-2.4.9-4.1 3.3 1.5 2.6 2.6"/><path d="m10.3 12.6-3 2.1-2.8 5.8"/><path d="M13 15.3 16 20.5"/></svg>
+          <h3>개인활동</h3>
+          <p>외출 시 동행, 산책, 은행·관공서 등 일상 업무 대행으로 바깥일을 함께합니다.</p>
+        </div>
+        <div class="slot" data-label="images/svc-daily.jpg">
+          <img loading="lazy" decoding="async" src="images/svc-daily.jpg" alt="요양보호사가 어르신과 산책하는 모습" onerror="this.setAttribute('data-missing','')">
+        </div>
+      </article>
+
+      <article class="svc-card">
+        <div class="svc-top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.6c0 3.4-3.4 6.2-7.6 6.2-.9 0-1.8-.1-2.6-.4L5 19.5l1.3-3.4C4.9 15 4 13.4 4 11.6 4 8.2 7.4 5.4 12 5.4s8 2.8 8 6.2Z"/><path d="M9.2 11.3h.01M12 11.3h.01M14.8 11.3h.01"/></svg>
+          <h3>정서지원</h3>
+          <p>말벗, 격려와 위로, 생활 상담 등 혼자 계신 시간의 외로움을 함께 나눕니다.</p>
+        </div>
+        <div class="slot" data-label="images/svc-emotion.jpg">
+          <img loading="lazy" decoding="async" src="images/svc-emotion.jpg" alt="요양보호사가 어르신과 대화를 나누는 모습" onerror="this.setAttribute('data-missing','')">
+        </div>
+      </article>
+    </div>
+
+    <p class="svc-foot">위 활동은 장기요양등급을 받으신 어르신께 국민건강보험공단 급여로 제공되며, 비용의 85%를 공단이 부담합니다. 기초생활수급자는 본인부담금이 없습니다.</p>
+  </div>
+</section>
+
+<!-- 센터 특징 -->
+<section id="feature" class="band">
+  <div class="wrap reveal">
+    <div class="center">
+      <h2 class="sec-title">왜 효심센터인가요?</h2>
+      <p class="sec-sub">낯선 사람이 부모님 댁에 들어갑니다. 그래서 저희가 반드시 지키는 것들입니다.</p>
+    </div>
+
+    <div class="feat">
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#E5883A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 20c.4-3.4 3.2-5.5 6.5-5.5 1.1 0 2.2.2 3.1.7"/><path d="m15.5 17.6 1.9 1.9 3.6-4"/></svg></div>
+        <h3>담당 선생님을 자주 바꾸지 않습니다</h3>
+        <p>어르신은 익숙한 사람에게 마음을 여십니다. 부득이한 사정이 아니면 처음 배정된 요양보호사가 계속 방문합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C0504B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9"/><circle cx="16" cy="7" r="2.2"/><path d="M20 12h-9"/><circle cx="8" cy="12" r="2.2"/><path d="M4 17h9"/><circle cx="16" cy="17" r="2.2"/></svg></div>
+        <h3>어르신에게 맞춰 계획을 짭니다</h3>
+        <p>요일과 시간, 우선순위를 어르신 생활 리듬과 보호자 사정에 맞춰 정합니다. 이용 중에도 언제든 조정할 수 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#4E9E96" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.5c0 3.3-3.4 6-7.5 6-.9 0-1.7-.1-2.5-.3L5 20l1.2-3.2C4.8 15.7 4 14.2 4 12.5c0-3.3 3.4-6 8-6s8 2.7 8 6Z"/></svg></div>
+        <h3>그날의 기록을 보호자께 전합니다</h3>
+        <p>식사와 복약, 그날의 기분과 몸 상태를 기록해 전달드립니다. 평소와 다른 점이 보이면 미루지 않고 그날 바로 연락드립니다.</p>
+      </div>
+    </div>
+
+    <div class="gallery">
+      <div class="slot" data-label="images/about-1.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-1.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
+      <div class="slot" data-label="images/about-2.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-2.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
+      <div class="slot" data-label="images/about-3.jpg (가로 900×600 권장)"><img loading="lazy" decoding="async" src="images/about-3.jpg" alt="" onerror="this.setAttribute('data-missing','')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 이용 절차 -->
+<section id="process">
+  <div class="wrap reveal">
+    <div class="center">
+      <h2 class="sec-title">이용 절차</h2>
+      <p class="sec-sub">등급이 없으셔도 괜찮습니다. 1번부터 함께 진행합니다.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>전화 상담</h3>
+        <p>어르신 연세, 현재 거동 상태, 함께 사는 가족이 있는지만 알려주세요. 상담은 비용이 들지 않습니다.</p>
+      </div>
+      <div class="step">
+        <h3>등급 신청</h3>
+        <p>국민건강보험공단에 장기요양인정을 신청합니다. 서류 작성과 접수를 대행해드립니다.</p>
+      </div>
+      <div class="step">
+        <h3>방문 조사</h3>
+        <p>공단 직원이 댁을 방문해 어르신 상태를 확인합니다. 무엇을 준비하면 좋은지 미리 안내해드립니다.</p>
+      </div>
+      <div class="step">
+        <h3>등급 판정</h3>
+        <p>등급판정위원회 심의를 거쳐 1~5등급 또는 인지지원등급이 결정되고 인정서가 발송됩니다.</p>
+      </div>
+      <div class="step">
+        <h3>서비스 시작</h3>
+        <p>요일과 시간을 정하고 담당 요양보호사를 배정합니다. 첫 방문에는 센터장이 함께 갑니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 비용 -->
+<section id="cost" class="band">
+  <div class="wrap reveal">
+    <div class="center">
+      <h2 class="sec-title">한 달에 얼마나 드나요?</h2>
+      <p class="sec-sub">재가급여는 국민건강보험공단이 85%를 부담하고 이용자는 15%를 냅니다. 등급을 눌러 예상 금액을 확인해보세요.</p>
+    </div>
+
+    <div class="calc">
+      <div class="grades" role="group" aria-label="장기요양등급 선택">
+        <button class="grade" type="button" data-g="1" aria-pressed="true">1등급</button>
+        <button class="grade" type="button" data-g="2" aria-pressed="false">2등급</button>
+        <button class="grade" type="button" data-g="3" aria-pressed="false">3등급</button>
+        <button class="grade" type="button" data-g="4" aria-pressed="false">4등급</button>
+        <button class="grade" type="button" data-g="5" aria-pressed="false">5등급</button>
+        <button class="grade" type="button" data-g="6" aria-pressed="false">인지지원</button>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <div class="row"><span>월 이용 한도액</span><b id="o-total">2,512,900원</b></div>
+        <div class="row"><span>공단 부담 (85%)</span><b id="o-gov">2,135,965원</b></div>
+        <div class="row big"><span>본인 부담 (15%)</span><b id="o-self">376,935원</b></div>
+        <p class="calc-hint" id="o-hint">3시간 방문요양 기준 월 최대 44회까지 이용하실 수 있습니다.</p>
+      </div>
+      <p class="calc-note">
+        월 한도액과 이용 횟수는 보건복지부가 2025년 11월 4일 장기요양위원회에서 의결·발표한 2026년도 기준입니다.
+        한도액을 넘겨 이용한 금액은 전액 본인이 부담합니다. 소득·재산 수준에 따라 본인부담을 낮춰주는 경감 제도가 있고, 기초생활수급자는 본인부담금이 없습니다.
+        실제 금액은 이용하신 서비스 종류와 시간에 따라 달라지므로 정확한 금액은
+        <a href="https://www.longtermcare.or.kr" target="_blank" rel="noopener">국민건강보험공단 노인장기요양보험</a> 또는 센터로 문의해주세요.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="center">
+      <h2 class="sec-title">오시는 길</h2>
+      <p class="sec-sub">방문 상담도 가능합니다. 오시기 전에 전화 한 통 주시면 준비해두겠습니다.</p>
+    </div>
+    <div class="contact">
+      <dl class="info">
+        <dt>상담 전화 · 문자</dt>
+        <dd><a href="tel:010-8975-2459">010-8975-2459</a><small>전화 연결이 어려우시면 문자를 남겨주세요.</small></dd>
+        <dt>주소</dt>
+        <dd>인천광역시 남동구 용천로 119</dd>
+        <dt>상담 시간</dt>
+        <dd>평일 09:00 – 18:00<small>그 외 시간에는 다음 영업일에 연락드립니다.</small></dd>
+        <dt>장기요양기관 지정번호</dt>
+        <dd style="font-size:1rem">제0000000000호</dd>
+      </dl>
+      <!--
+        지도: 카카오맵 또는 네이버 지도의 '지도 퍼가기' iframe 코드를
+        아래 div 전체와 교체하세요. (카카오맵 → 장소 검색 → 공유 → 지도 퍼가기)
+      -->
+      <div class="map">여기에 카카오맵 또는 네이버 지도<br>‘지도 퍼가기’ 코드를 넣으세요</div>
+    </div>
+  </div>
+</section>
+
+<!-- 빠른 상담 신청 -->
+<section class="apply" id="apply">
+  <div class="wrap apply-in reveal">
+    <div>
+      <h2>빠른<br>상담 신청</h2>
+      <p class="lead">무엇부터 물어야 할지 모르셔도 괜찮습니다. 연락처만 남겨주시면 저희가 먼저 전화드립니다.</p>
+    </div>
+    <form class="form-grid" id="applyForm" novalidate>
+      <input type="text" name="name" placeholder="이름" required autocomplete="name">
+      <input type="tel" name="phone" placeholder="연락처" required autocomplete="tel" inputmode="tel">
+      <textarea class="full" name="message" placeholder="상담 내용 (어르신 연세, 현재 상태, 궁금한 점을 편하게 적어주세요)"></textarea>
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span>상담 진행을 위해 이름과 연락처를 수집·이용하는 데 동의합니다. 수집한 정보는 상담 목적으로만 사용하며 상담 완료 후 3개월 이내 파기합니다.</span>
+      </label>
+      <div class="form-actions">
+        <button class="btn btn-o" type="submit">제출하기</button>
+        <span class="form-msg" id="formMsg" role="status"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <strong>효심노인복지센터</strong>
+        인천광역시 남동구 용천로 119<br>
+        대표 ○○○ · 사업자등록번호 000-00-00000<br>
+        장기요양기관 지정번호 제0000000000호
+      </div>
+      <div>
+        <strong>문의</strong>
+        전화 · 문자 010-8975-2459<br>
+        이메일 hyosim@example.com<br>
+        평일 09:00 – 18:00
+      </div>
+    </div>
+    <p class="fine">본 홈페이지에 안내된 급여 기준은 국민건강보험공단이 정한 2026년도 기준이며, 실제 이용 금액은 어르신의 등급과 이용 내역에 따라 달라집니다.</p>
+    <p class="fine">© 2026 효심노인복지센터</p>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="c1" href="tel:010-8975-2459">전화 상담하기</a>
+  <a class="c2" href="sms:010-8975-2459">문자 남기기</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"효심노인복지센터",
+  "description":"인천 남동구 재가노인요양센터. 방문요양 및 장기요양등급 신청 지원.",
+  "url":"https://example.com",
+  "image":"https://example.com/images/hero.jpg",
+  "telephone":"+82-10-8975-2459",
+  "address":{"@type":"PostalAddress","streetAddress":"용천로 119","addressLocality":"남동구","addressRegion":"인천광역시","addressCountry":"KR"},
+  "geo":{"@type":"GeoCoordinates","latitude":37.4450,"longitude":126.7310},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}],
+  "areaServed":"인천광역시 남동구"
+}
+</script>
+
+<script>
+(function(){
+  /* ───── 상담 폼 전송 주소 ─────
+     Formspree 등에서 발급받은 URL을 넣으세요. 비워두면 전화 안내가 뜹니다.
+     예) var FORM_ENDPOINT = "https://formspree.io/f/xxxxxxx";           */
+  var FORM_ENDPOINT = "";
+
+  /* 2026년도 등급별 재가급여 월 한도액
+     (보건복지부 2025.11.4 장기요양위원회 의결) */
+  var DATA = {
+    "1":{limit:2512900, hint:"3시간 방문요양 기준 월 최대 44회까지 이용하실 수 있습니다."},
+    "2":{limit:2331200, hint:"3시간 방문요양 기준 월 최대 40회까지 이용하실 수 있습니다."},
+    "3":{limit:1528200, hint:"방문요양은 하루 최대 3시간까지 이용하실 수 있습니다."},
+    "4":{limit:1409700, hint:"방문요양은 하루 최대 3시간까지 이용하실 수 있습니다."},
+    "5":{limit:1208900, hint:"치매 어르신을 위한 인지활동형 방문요양을 이용하실 수 있습니다."},
+    "6":{limit:676320,  hint:"인지지원등급은 방문요양 대신 주야간보호, 인지활동형 방문요양, 복지용구를 이용하실 수 있습니다."}
+  };
+  var won = function(n){ return Math.round(n).toLocaleString('ko-KR') + '원'; };
+  var elTotal = document.getElementById('o-total'),
+      elGov   = document.getElementById('o-gov'),
+      elSelf  = document.getElementById('o-self'),
+      elHint  = document.getElementById('o-hint');
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.grade'));
+
+  function render(g){
+    var d = DATA[g];
+    elTotal.textContent = won(d.limit);
+    elGov.textContent   = won(d.limit * 0.85);
+    elSelf.textContent  = won(d.limit * 0.15);
+    elHint.textContent  = d.hint;
+    buttons.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.g === g ? 'true' : 'false'); });
+  }
+  buttons.forEach(function(b){ b.addEventListener('click', function(){ render(b.dataset.g); }); });
+  render('1');
+
+  /* 상담 폼 */
+  var form = document.getElementById('applyForm'),
+      msg  = document.getElementById('formMsg');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.name.value.trim(), phone = form.phone.value.trim();
+    if(!name || !phone){ msg.textContent = '이름과 연락처를 입력해주세요.'; return; }
+    if(!form.consent.checked){ msg.textContent = '개인정보 수집·이용에 동의해주세요.'; return; }
+    if(!FORM_ENDPOINT){ msg.textContent = '010-8975-2459로 연락 주시면 바로 상담해드립니다.'; return; }
+
+    msg.textContent = '보내는 중…';
+    fetch(FORM_ENDPOINT, { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) })
+      .then(function(r){
+        if(r.ok){ form.reset(); msg.textContent = '접수됐습니다. 영업일 기준 1일 이내에 연락드리겠습니다.'; }
+        else{ msg.textContent = '전송에 실패했습니다. 010-8975-2459로 전화 주세요.'; }
+      })
+      .catch(function(){ msg.textContent = '전송에 실패했습니다. 010-8975-2459로 전화 주세요.'; });
+  });
+
+  /* 스크롤 등장 */
+  var items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{threshold:.1, rootMargin:'0px 0px -50px 0px'});
+  items.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
